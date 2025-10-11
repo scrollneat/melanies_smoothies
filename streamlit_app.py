@@ -41,10 +41,10 @@ if ingredients_list:
     for chosen_fruit in ingredients_list: 
         ingredients_string += chosen_fruit + ' '
         search_on=pd_df.loc[pd_df['FRUIT_NAME'] == chosen_fruit, 'SEARCH_ON'].iloc[0]
-        st.write('The search value for ', chosen_fruit,' is ', search_on, '.')
+        # st.write('The search value for ', chosen_fruit,' is ', search_on, '.')
 
         st.subheader =(chosen_fruit + 'Nutrition Information')
-        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + chosen_fruit )
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + search_on )
         sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width = True)
 
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients, name_on_order)
